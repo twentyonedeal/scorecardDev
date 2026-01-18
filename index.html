@@ -74,7 +74,7 @@
 </head>
 <body>
 <div class="container">
-    <h1 style="text-align:center; font-size: 2rem; margin:0 0 5px 0;">Jay's Ultimate Scorecard</h1>
+    <h1 style="text-align:center; font-size: 1.5rem; margin:0 0 5px 0;">Jay's Ultimate Scorecard</h1>
     <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">v106</div>
     <div id="activeGameLabel" style="font-size: 0.75rem; text-align: center; color: #3498db; margin-bottom:10px;"></div>
             <span id="offlineTag">Checking...</span>
@@ -164,12 +164,11 @@
 
 <input type="text" id="saveNameIn" placeholder="Game Name" onkeydown="if(event.key==='Enter') doSave(false)">
 <div style="display:flex; flex-direction:column; gap:8px; margin-top:15px;">
-<button onclick="doSave(false)" style="background:#27d647; color:#FFFFFF; padding:10px; border:none; border-radius:8px;">Update Current (or Change Name)</button>
-<button onclick="doSave(true)" style="background:#3498db; color:#FFFFFF; padding:10px; border:none; border-radius:8px;">Save Copy (Optional: Enter New Name)</button>
-<button onclick="closeModal('saveGameModal')" style="background:#95a5a6; color:#FFFFFF; border:none; border-radius:8px; padding:10px;">Cancel</button>
+<button onclick="doSave(false)" style="width:100%; background:#27d647; padding:15px .2rem; font-size:1rem; color:white; border:none; border-radius:10px;">Update Current (or Change Name)</button>
+<button onclick="doSave(true)" style="width:100%; background:#3498db;  padding:15px .2rem; font-size:1rem; color:white; border:none; border-radius:10px;">Save Copy (or Enter New Name)</button>
+<button onclick="closeModal('saveGameModal')" style="width:100%; background:#95a5a6;  padding:15px .2rem; font-size:1rem; color:white; border:none; border-radius:10px;">Cancel</button>
 </div>
 </div></div>
-
 
 
 
