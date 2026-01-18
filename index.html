@@ -198,12 +198,12 @@
 <div id="toast"></div>
 <script>
 
-	//if ('serviceWorker' in navigator) {
-	//	navigator.serviceWorker.register('sw.js');
-	//	}
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('sw.js');
+		}
     // OFFLINE SYNC LOGIC not sure if its a problem to have this run twice once in the sw.js file and again here.
    if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('data:text/javascript;base64,' + btoa(`
+    	navigator.serviceWorker.register('data:text/javascript;base64,' + btoa(`
         self.addEventListener('install', e => self.skipWaiting());
         self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
     `))
