@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Js ScoreCard V106</title>
+    <title>Js ScoreCard V107</title>
     
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -75,7 +75,7 @@
 <body>
 <div class="container">
     <h1 style="text-align:center; font-size: 1.5rem; margin:0 0 5px 0;">Jay's Ultimate Scorecard</h1>
-    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">v106</div>
+    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">v107</div>
     <div id="activeGameLabel" style="font-size: 0.75rem; text-align: center; color: #3498db; margin-bottom:10px;"></div>
             <span id="offlineTag">Checking...</span>
 
@@ -156,47 +156,29 @@
 </div></div>
 
 
-
-
-
 <div id="saveGameModal" class="modal"><div class="modal-content">
 <h3>Save Game</h3>
-
-<input type="text" id="saveNameIn" placeholder="Game Name" onkeydown="if(event.key==='Enter') doSave(false)">
+<input type="text" id="saveNameIn" placeholder="LisaWins" onkeydown="if(event.key==='Enter') doSave(false)">
 <div style="display:flex; flex-direction:column; gap:8px; margin-top:15px;">
-<button onclick="doSave(false)" style="width:100%; background:#27d647; padding:15px .2rem; font-size:1rem; color:white; border:none; border-radius:10px;">Update Current (or Change Name)</button>
-<button onclick="doSave(true)" style="width:100%; background:#3498db;  padding:15px .2rem; font-size:1rem; color:white; border:none; border-radius:10px;">Save Copy (or Enter New Name)</button>
-<button onclick="closeModal('saveGameModal')" style="width:100%; background:#95a5a6;  padding:15px .2rem; font-size:1rem; color:white; border:none; border-radius:10px;">Cancel</button>
+<button onclick="doSave(false)" style="width:100%; background:#27d647; padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Update Current (or Change Name)</button>
+<button onclick="doSave(true)" style="width:100%; background:#3498db;  padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Save Copy (or Enter New Name)</button>
+<button onclick="closeModal('saveGameModal')" style="width:100%; background:#95a5a6;  padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Cancel</button>
 </div>
 </div></div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div id="confirmModal" class="modal"><div class="modal-content"><h3 id="confirmTitle">Delete?</h3><div style="display:flex; gap:10px;"><button id="confirmYes" style="flex:1; background:#e74c3c; color:white; border:none; padding:12px; border-radius:8px;">Yes</button><button onclick="closeModal('confirmModal')" style="flex:1; background:#95a5a6; color:white; border:none; padding:12px; border-radius:8px;">No</button></div></div></div>
+<div id="confirmModal" class="modal"><div class="modal-content"><h3 id="confirmTitle">Delete?</h3>
+<div style="display:flex; gap:10px;"><button id="confirmYes" style="flex:1; background:#e74c3c; color:white; border:none; padding:12px; border-radius:8px;">Yes</button>
+<button onclick="closeModal('confirmModal')" style="flex:1; background:#95a5a6; color:white; border:none; padding:12px; border-radius:8px;">No</button></div></div></div>
 
 
 <div id="resetModal" class="modal"><div class="modal-content">
     <h3>Reset Game</h3>
-    <button onclick="doReset('scores')" style="width:100%; background:#3498db; color:f0f2f5; padding:12px; margin-bottom:10px; border:none; border-radius:8px;">Clear Scores Only</button>
-    <button onclick="doReset('all')" style="width:100%; background:#e74c3c; color:f0f2f5; padding:12px; border:none; border-radius:8px;">Full Reset</button>
-    <button onclick="closeModal('resetModal')" style="width:100%; margin-top:10px; background:#95a5a6; color:f0f2f5; padding:12px; border:none; border-radius:8px;">Cancel</button>
+    <div style="display:flex; flex-direction:column; gap:8px; margin-top:15px;">
+	<button onclick="doReset('scores')" style="width:100%; background:#3498db; padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Clear Scores Only</button>
+    <button onclick="doReset('all')" style="width:100%; background:#e74c3c; padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Full Reset</button>
+    <button onclick="closeModal('resetModal')" style="width:100%; background:#95a5a6; padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Cancel</button>
+</div>
 </div></div>
-
 
 <div id="renameModal" class="modal"><div class="modal-content"><h3>Rename</h3><input type="text" id="renameIn" style="width:100%;" onkeydown="if(event.key==='Enter') saveRename()"><button onclick="saveRename()" style="width:100%; margin-top:10px; background:var(--accent); color:white; padding:12px; border:none; border-radius:8px;">Update</button></div></div>
 <div id="editModal" class="modal"><div class="modal-content">
@@ -206,10 +188,6 @@
 <button onclick="saveEdit()" style="width:100%; margin-top:15px; padding:12px; background:var(--accent); color:white; border:none; border-radius:8px;">Update Score</button>
     <button onclick="closeModal('editModal')" style="width:100%; margin-top:15px; padding:12px; background:#95a5a6; color:white; border:none; border-radius:8px;">Cancel</button>
 </div></div>
-
-
-
-
 
 
 <div id="libraryModal" class="modal"><div class="modal-content" style="max-width:380px;"><h3>📚 Library</h3><div id="libList" style="max-height:350px; overflow-y:auto;"></div><button onclick="closeModal('libraryModal')" style="width:100%; margin-top:15px; padding:12px; background:#34495e; color:white; border:none; border-radius:8px;">Close</button></div></div>
@@ -369,9 +347,9 @@
         let activeGame = library.find(g => g.id == activeId);
 document.getElementById('activeGameLabel').innerHTML = activeId 
   ? (hasUnsavedChanges 
-      ? `📁: ${activeGame?.name || "Game"} <span style="color: red;">${saveMe}</span>` 
-      : `📁: ${activeGame?.name || "Game"}`) 
-  : "✨ New Game";        document.getElementById('batchAction').style.display = players.length ? 'block' : 'none';
+      ? `📁: ${activeGame?.name || "LisaWins"} <span style="color: red;">${saveMe}</span>` 
+      : `📁: ${activeGame?.name || "LisaWins"}`) 
+  : "✨ LisaWinsAgain";        document.getElementById('batchAction').style.display = players.length ? 'block' : 'none';
         let lastRound = rounds.length > 0 ? rounds[rounds.length - 1] : null;
         document.getElementById('leaderboard').innerHTML = players.map((p,i) => `
             <tr>
@@ -381,9 +359,9 @@ document.getElementById('activeGameLabel').innerHTML = activeId
                 <td><b onclick="openRename(${p.id})">${p.name}</b></td>
                 <td onclick="askDelP(${p.id})" style="width:23px; text-align:right; opacity:0.6;">🗑️</td>
                 <td class="toggle-col" style="text-align:right; font-size:0.7rem; color:var(--hideNum); width:22px;">${lastRound ? `(${lastRound.scores[p.id]})` : ''}</td>
-                <td style="text-align:right; font-weight:bold; padding-right:5px; width:60px;">${p.score}</td>
-                <td class="col-batch"><input type="number" pattern="[0-9]*" id="b-${p.id}" font-size: 2rem; placeholder="+" style="width:95px; padding:10px; border:2px solid ${p.color}">
-				         <button onclick="openCalc('b-${p.id}')" style="position:absolute; right:.2rem; top:50%; transform:translateY(-50%); font-size:0.8rem; padding: .5rem; border-radius:4px; border:none; background:#34495e; color:white;">CALC</button>
+                <td style="text-align:right; font-weight:bold; padding-right:8px; width:60px;">${p.score}</td>
+                <td class="col-batch"><input type="number" pattern="[0-9]*" id="b-${p.id}" font-size: 2rem; placeholder="+" style="width:90px; padding:10px; border:2px solid ${p.color}">
+				         <button onclick="openCalc('b-${p.id}')" style="position:absolute; right:.8rem; top:50%; transform:translateY(-50%); font-size:0.8rem; padding: .3rem .3rem .3rem .3rem; border-radius:4px; border:none; background:#34495e; color:white;">CALC</button>
 
 				</td>
             </tr>`).join('');
@@ -404,13 +382,13 @@ document.getElementById('activeGameLabel').innerHTML = activeId
 
     function openSaveModal() {
         let activeGame = library.find(g => g.id == activeId);
-        document.getElementById('saveNameIn').value = activeGame ? activeGame.name : "New Game";
+        document.getElementById('saveNameIn').value = activeGame ? activeGame.name : "LisaWins";
         openModal('saveGameModal');
         setTimeout(()=>document.getElementById('saveNameIn').select(), 100);
     }
 
     function doSave(isNew) {
-        let n = document.getElementById('saveNameIn').value || "Game";
+        let n = document.getElementById('saveNameIn').value || "LisaWins";
         let snap = { id: isNew ? Date.now() : (activeId || Date.now()), name: n, players: JSON.parse(JSON.stringify(players)), rounds: JSON.parse(JSON.stringify(rounds)), date: new Date().toLocaleString() };
         if(isNew || !activeId) library.push(snap); else {
             let idx = library.findIndex(x => x.id == activeId);
@@ -424,7 +402,7 @@ document.getElementById('activeGameLabel').innerHTML = activeId
             <div style="padding:12px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
                 <div onclick="loadG(${i})" style="flex:1;"><b>${g.name}</b><br><small>${g.date}</small></div>
                 <div style="display:flex; gap:10px;">
-                    <button onclick="shareG(${i})" style="background:#27ae60; color:#FFFFFF; border:none; border-radius:6px; padding:8px 10px;">📤</button>
+                    <button onclick="shareG(${i})" style="background:#27ae60; color:white; border:none; border-radius:6px; padding:8px 10px;">📤</button>
                     <button onclick="delSave(${i})" style="background:#e74c3c; color:white; border:none; border-radius:6px; padding:8px 10px;">🗑️</button>
                 </div>
             </div>`).join('') || "No saved games.";
@@ -461,9 +439,18 @@ document.getElementById('activeGameLabel').innerHTML = activeId
 
     function copyToClipboard(t) { navigator.clipboard.writeText(t).then(() => showToast("Standings Copied!")); }
 
-    function doReset(t) { 
+    function doReset(t) {
+		if (hasUnsavedChanges) {
+            document.getElementById('confirmTitle').innerText = "Discard unsaved changes?";
+            openModal('confirmModal');
+            document.getElementById('confirmYes').onclick = () => { actuallydoReset(t); closeModal('confirmModal'); };
+        } else { actuallydoReset(t); }
+	}
+
+	function actuallydoReset(t) {
         if(t==='scores'){ rounds=[]; players.forEach(p=>p.score=0); } else { players=[]; rounds=[]; activeId=null; } 
-        hasUnsavedChanges=true; closeModal('resetModal'); sync(); 
+        hasUnsavedChanges=true; closeModal('resetModal');
+		sync(); 
     }
   
 
