@@ -74,7 +74,7 @@
 </head>
 <body>
 <div class="container">
-    <h1 style="text-align:center; margin:0 0 5px 0;">Jay's Ultimate Scorecard</h1>
+    <h1 style="text-align:center; font-size: 1rem; margin:0 0 5px 0;">Jay's Ultimate Scorecard</h1>
     <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">v106</div>
     <div id="activeGameLabel" style="font-size: 0.75rem; text-align: center; color: #3498db; margin-bottom:10px;"></div>
             <span id="offlineTag">Checking...</span>
@@ -164,9 +164,9 @@
 
 <input type="text" id="saveNameIn" placeholder="Game Name" onkeydown="if(event.key==='Enter') doSave(false)">
 <div style="display:flex; flex-direction:column; gap:8px; margin-top:15px;">
-<button onclick="doSave(false)" style="padding:10px;">Update Current (or Change Name)</button>
-<button onclick="doSave(true)" style="background:#3498db; color:white; padding:10px; border:none; border-radius:8px;">Save Copy (Optional: Enter New Name)</button>
-<button onclick="closeModal('saveGameModal')" style="background:#95a5a6; color:white; border:none; border-radius:8px; padding:10px;">Cancel</button>
+<button onclick="doSave(false)" style="background:#27d647; color:f0f2f5; padding:10px; border:none; border-radius:8px;">Update Current (or Change Name)</button>
+<button onclick="doSave(true)" style="background:#3498db; color:f0f2f5; padding:10px; border:none; border-radius:8px;">Save Copy (Optional: Enter New Name)</button>
+<button onclick="closeModal('saveGameModal')" style="background:#95a5a6; color:f0f2f5; border:none; border-radius:8px; padding:10px;">Cancel</button>
 </div>
 </div></div>
 
@@ -193,9 +193,9 @@
 
 <div id="resetModal" class="modal"><div class="modal-content">
     <h3>Reset Game</h3>
-    <button onclick="doReset('scores')" style="width:100%; background:#3498db; color:white; padding:12px; margin-bottom:10px; border:none; border-radius:8px;">Clear Scores Only</button>
-    <button onclick="doReset('all')" style="width:100%; background:#e74c3c; color:white; padding:12px; border:none; border-radius:8px;">Full Reset</button>
-    <button onclick="closeModal('resetModal')" style="width:100%; margin-top:10px; background:#95a5a6; color:white; padding:12px; border:none; border-radius:8px;">Cancel</button>
+    <button onclick="doReset('scores')" style="width:100%; background:#3498db; color:f0f2f5; padding:12px; margin-bottom:10px; border:none; border-radius:8px;">Clear Scores Only</button>
+    <button onclick="doReset('all')" style="width:100%; background:#e74c3c; color:f0f2f5; padding:12px; border:none; border-radius:8px;">Full Reset</button>
+    <button onclick="closeModal('resetModal')" style="width:100%; margin-top:10px; background:#95a5a6; color:f0f2f5; padding:12px; border:none; border-radius:8px;">Cancel</button>
 </div></div>
 
 
