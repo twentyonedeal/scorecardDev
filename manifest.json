@@ -1,10 +1,6 @@
 {
-  "name": "Js ScoreCard V102",
+  "name": "JAYs ScoreCard",
   "short_name": "Scorecard",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#f0f2f5",
-  "theme_color": "#27ae60",
   "icons": [
     {
       "src": "icon-192.png",
@@ -18,4 +14,11 @@
       "type": "image/png"
     }
   ]
+  "start_url": "./index.html",
+  "background_color": "#6A0DAD",
+  "display": "standalone",
+  "scope": "./",
+  "theme_color": "#6A0DAD"
 }
+
+
