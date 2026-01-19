@@ -198,23 +198,33 @@
 <div id="toast"></div>
 <script>
 
+
 	if ('serviceWorker' in navigator) {
-		navigator.serviceWorker.register('sw.js');
-		}
-    // OFFLINE SYNC LOGIC not sure if its a problem to have this run twice once in the sw.js file and again here.
-   if ('serviceWorker' in navigator) {
-    	navigator.serviceWorker.register('data:text/javascript;base64,' + btoa(`
-        self.addEventListener('install', e => self.skipWaiting());
-        self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
-    `))
-    .then(() => { 
-        document.getElementById('syncStatus').innerText = "✅ Offline Ready"; 
+    navigator.serviceWorker.register('sw.js') // Points to your new file
+    .then((registration) => {
+        const statusEl = document.getElementById('syncStatus');
+        
+        // If it's already active
+        if (registration.active) {
+            statusEl.innerText = "✅ Offline Ready";
+        }
+
+        // Listen for the moment it becomes active
+        registration.onupdatefound = () => {
+            const installingWorker = registration.installing;
+            installingWorker.onstatechange = () => {
+                if (installingWorker.state === 'activated') {
+                    statusEl.innerText = "✅ Offline Ready";
+                }
+            };
+        };
     })
     .catch((err) => {
         document.getElementById('syncStatus').innerText = "⚠️ Offline Unavailable";
         console.error("SW Registration failed:", err);
     });
 }
+
 
     let players = JSON.parse(localStorage.getItem('v102_p')) || [];
     let rounds = JSON.parse(localStorage.getItem('v102_r')) || [];
