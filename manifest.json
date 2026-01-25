@@ -1,6 +1,11 @@
 {
-  "name": "JAYs ScoreCard",
-  "short_name": "Scorecard",
+  "name": "JAY Scorepad",
+  "short_name": "JAY Score",
+  "start_url": "/scorepad/index.html",
+  "scope": "/scorepad/",
+  "display": "standalone",
+  "background_color": "#4B0082",
+  "theme_color": "#4B0082",
   "icons": [
     {
       "src": "icon-192.png",
@@ -11,15 +16,8 @@
     {
       "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
       "purpose": "maskable any"
     }
   ]
-  "start_url": "/scorepad/",
-  "scope": "/scorepad/"
-  "background_color": "#6A0DAD",
-  "display": "standalone",
-  "theme_color": "#6A0DAD"
 }
-
-
