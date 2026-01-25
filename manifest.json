@@ -1,8 +1,8 @@
 {
-  "name": "JAY Scorepad",
-  "short_name": "JAY Score",
-  "start_url": "/scorepad/index.html",
-  "scope": "/scorepad/",
+  "name": "JAYs Scorecard",
+  "short_name": "ScorecardDev",
+  "start_url": "/scorecardDev/index.html",
+  "scope": "/scorecardDev/",
   "display": "standalone",
   "background_color": "#4B0082",
   "theme_color": "#4B0082",
