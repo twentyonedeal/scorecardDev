@@ -79,21 +79,13 @@
 <body>
 <div class="container">
     <h1 style="text-align:center; font-size: 1.5rem; margin:0 0 5px 0;">Jay's Ultimate Scorecard</h1>
-    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">v108</div>
-    <div id="activeGameLabel" style="font-size: 0.75rem; text-align: center; color: #3498db; margin-bottom:10px;"></div>
-            <span id="offlineTag">Checking...</span>
+    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">v109</div>
+    <div id="activeGameLabel" style="font-size: 0.75rem; text-align: center; margin-bottom:5px;"></div>
+            <span style="display: inline-block; margin-bottom:10px;" id="offlineTag">Checking...</span>
 
 
-   <div class="win-toggle-container">
-    <span id="highWinsLabel" style="color: #27ae60; font-weight: bold;">High Wins</span>
-    <label class="switch">
-        <input type="checkbox" id="winConditionToggle" onchange="toggleWinCondition()">
-        <span class="slider"></span>
-    </label>
-    <span id="lowWinsLabel" style="color: grey;">Low Wins</span>
-</div>
 
-    <div id="winnerSpotlight" style="text-align:center; padding:10px; margin-bottom:15px; border-radius:10px; font-weight:bold; display:none; color: black;"></div>
+
 
     <div style="display:grid; grid-template-columns: 1fr 1fr 44px; gap:8px; margin-bottom:15px;">
         <button onclick="openSaveModal()" style="background:#3498db; color:white; border:none; border-radius:8px; padding:12px;">💾 Save</button>
@@ -106,6 +98,16 @@
         <div class="square-color-picker" id="colorPreview" style="width:40px; height:40px; border-radius:8px; background:#3498db;" onclick="openColorPicker('new')"></div>
         <button onclick="addPlayer()" style="background:var(--accent); color:white; border:none; padding:10px 15px; border-radius:8px; font-weight:bold;">Add</button>
     </div>
+	       <div class="win-toggle-container">
+    <span id="highWinsLabel" style="color: #27ae60; font-weight: bold;">High Wins</span>
+    <label class="switch">
+        <input type="checkbox" id="winConditionToggle" onchange="toggleWinCondition()">
+        <span class="slider"></span>
+    </label>
+    <span id="lowWinsLabel" style="color: grey;">Low Wins</span>
+</div>
+		<div id="winnerSpotlight" style="text-align:center; padding:10px; margin-bottom:15px; border-radius:10px; font-weight:bold; display:none; color: black;"></div>
+
        <div class="section-title">
 	   <span>🏆 Leader Board</span>
 			<div class="controls">
@@ -194,10 +196,13 @@
 </div></div>
 
 
-<div id="libraryModal" class="modal"><div class="modal-content" style="max-width:380px;"><h3>📚 Library</h3><div id="libList" style="max-height:350px; overflow-y:auto;"></div><button onclick="closeModal('libraryModal')" style="width:100%; margin-top:15px; padding:12px; background:#34495e; color:white; border:none; border-radius:8px;">Close</button></div></div>
+<div id="libraryModal" class="modal"><div class="modal-content" style="max-width:380px;"><h3>📚 Library</h3><div id="libList" style="max-height:350px; overflow-y:auto;"></div><button onclick="closeModal('libraryModal')" style="width:100%; background:#95a5a6;  padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Close</button></div></div>
 
 
-<div id="colorModal" class="modal"><div class="modal-content"><h3>Pick Color</h3><input type="color" id="nativePicker" oninput="liveColor(this.value)" style="width:100px; height:100px; border:none; background:none;"><button onclick="closeModal('colorModal')" style="width:100%; margin-top:10px;">Done</button></div></div>
+<div id="colorModal" class="modal"><div class="modal-content"><h3>Pick Color</h3><input type="color" id="nativePicker" oninput="liveColor(this.value)" style="width:100px; height:100px; border:none; background:none;"><button onclick="closeModal('colorModal')" style="width:100%; background:#95a5a6;  padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Done</button></div></div>
+
+
+
 
 <div id="toast"></div>
 <script>
@@ -371,11 +376,11 @@ document.getElementById('activeGameLabel').innerHTML = activeId
                 <td style="width:30px; text-align:center;font-weight:bold;">${i+1}</td>
                 <td style="width:35px;"><div class="circle-color-picker" style="background:${p.color}; width:22px; height:22px; border-radius:50%;" onclick="openColorPicker('edit', ${p.id})"></div></td>
                 <td><b onclick="openRename(${p.id})">${p.name}</b></td>
-                <td onclick="askDelP(${p.id})" style="width:23px; text-align:right; opacity:0.6;">🗑️</td>
-                <td class="toggle-col" style="text-align:right; font-size:0.7rem; color:var(--hideNum); width:22px;">${lastRound ? `(${lastRound.scores[p.id]})` : ''}</td>
+                <td onclick="askDelP(${p.id})" style="width:43px; text-align:left; opacity:0.6;">🗑️</td>
+                <td class="toggle-col" style="text-align:left; font-size:0.7rem; color:var(--hideNum); width:32px;">${lastRound ? `(${lastRound.scores[p.id]})` : ''}</td>
                 <td style="text-align:right; font-weight:bold; padding-right:8px; width:60px;">${p.score}</td>
-                <td class="col-batch"><input type="number" pattern="[0-9]*" id="b-${p.id}" font-size: 2rem; placeholder="+" style="width:90px; padding:10px; border:2px solid ${p.color}">
-				         <button onclick="openCalc('b-${p.id}')" style="position:absolute; right:.8rem; top:50%; transform:translateY(-50%); font-size:0.8rem; padding: .3rem .3rem .3rem .3rem; border-radius:4px; border:none; background:#34495e; color:white;">CALC</button>
+                <td class="col-batch"><input type="number" pattern="[0-9]*" id="b-${p.id}" font-size: 2rem; placeholder="+" style="width:95px; padding:10px; border:2px solid ${p.color}">
+				         <button onclick="openCalc('b-${p.id}')" style="position:absolute; right:.4em; top:50%; transform:translateY(-50%); font-size:0.8rem; padding: .3rem .3rem .3rem .3rem; border-radius:4px; border:none; background:#34495e; color:white;">CALC</button>
 
 				</td>
             </tr>`).join('');
