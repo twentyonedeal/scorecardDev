@@ -9,21 +9,32 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="apple-mobile-web-app-title" content="Scorecard">
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">
-		
+
+<meta name="theme-color" content="#4B0082">
 
    <style>
-	   /* Add this to your styles.css */
-html, body {
-    background-color: #4B0082; /* Your deep purple */
+body {
+    /* This ensures your body starts at the very top */
     margin: 0;
     padding: 0;
-    min-height: 100vh;
 }
-  header {
-    background-color: #4B0082;
-    /* This adds padding ONLY at the top, specifically 
-       matching the height of the iPhone status bar */
-    padding-top: env(safe-area-inset-top); 
+
+/* Create a top bar that covers the status area */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* The magic variable that matches the height of the notch/clock */
+    height: env(safe-area-inset-top); 
+    background-color: #4B0082; /* Your deep purple */
+    z-index: 9999; /* Keeps it above everything else */
+}
+
+/* Push your actual content down so it doesn't hide behind the purple shelf */
+header, .main-container {
+    margin-top: env(safe-area-inset-top);
 }
 	  
 	
