@@ -12,10 +12,21 @@
 		
 
    <style>
-	   header {
-    padding-top: env(safe-area-inset-top);
-    background-color: #4B0082;
+	   /* Add this to your styles.css */
+html, body {
+    background-color: #4B0082; /* Your deep purple */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
 }
+  header {
+    background-color: #4B0082;
+    /* This adds padding ONLY at the top, specifically 
+       matching the height of the iPhone status bar */
+    padding-top: env(safe-area-inset-top); 
+}
+	  
+	
         * { box-sizing: border-box; }
         :root { --hideNum: "white"; --bg: #f0f2f5; --card: #ffffff; --text: #2c3e50; --border: #ced4da; --accent: #27ae60; --total-bg: #e2e6ea; }
         .dark-mode { --bg: #121212; --card: #1e1e1e; --text: #e0e0e0; --border: #444; --accent: #2ecc71; --total-bg: #2d2d2d; }
