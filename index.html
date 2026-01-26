@@ -13,29 +13,28 @@
 <meta name="theme-color" content="#4B0082">
 
    <style>
-body {
-    /* This ensures your body starts at the very top */
-    margin: 0;
-    padding: 0;
-}
+/* Apply to the very top of your style section */
+        body {
+            margin: 0;
+            padding: 0;
+        }
 
-/* Create a top bar that covers the status area */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    /* The magic variable that matches the height of the notch/clock */
-    height: env(safe-area-inset-top); 
-    background-color: #4B0082; /* Your deep purple */
-    z-index: 9999; /* Keeps it above everything else */
-}
+        /* This creates the purple bar behind the clock/battery */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: env(safe-area-inset-top);
+            background-color: #4B0082;
+            z-index: 9999;
+        }
 
-/* Push your actual content down so it doesn't hide behind the purple shelf */
-header, .container {
-    margin-top: env(safe-area-inset-top);
-}
+        /* This pushes your app content down so the purple bar doesn't cover it */
+        #container, header { 
+            padding-top: env(safe-area-inset-top);
+        }
 	  
 	
         * { box-sizing: border-box; }
