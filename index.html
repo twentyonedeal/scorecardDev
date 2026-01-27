@@ -12,30 +12,31 @@
 
 <meta name="theme-color" content="#4B0082">
 
-   <style>
-/* Apply to the very top of your style section */
-        body {
-            margin: 0;
-            padding: 0;
-        }
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
 
-        /* This creates the purple bar behind the clock/battery */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: env(safe-area-inset-top);
-            background-color: #4B0082;
-            z-index: 9999;
-        }
+    /* 1. Create the purple "shelf" behind the clock */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        /* Specifically matches the height of the iPhone status bar */
+        height: env(safe-area-inset-top); 
+        background-color: #4B0082;
+        z-index: 9999;
+    }
 
-        /* This pushes your app content down so the purple bar doesn't cover it */
-        #container, header { 
-            padding-top: env(safe-area-inset-top);
-        }
-	  
+    /* 2. Push your content down so it starts AFTER the status bar */
+    .container {
+        padding-top: env(safe-area-inset-top);
+    }
+    
+   	  
 	
         * { box-sizing: border-box; }
         :root { --hideNum: "white"; --bg: #f0f2f5; --card: #ffffff; --text: #2c3e50; --border: #ced4da; --accent: #27ae60; --total-bg: #e2e6ea; }
