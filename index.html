@@ -118,7 +118,13 @@ header {
 			}
         input[type="number"], input[type="text"] { padding: 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--text); }
         #toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #333; color: white; padding: 12px 25px; border-radius: 25px; font-size: 0.9rem; opacity: 0; transition: opacity 0.3s; z-index: 4000; pointer-events: none; }
-
+.container {
+    /* Push content down so it starts below the fixed header */
+    /* Adjust '80px' based on how tall your JAY Scorepad title is */
+    margin-top: calc(env(safe-area-inset-top) + 60px); 
+    padding: 15px;
+    background-color: transparent; /* Let the body color show through */
+}
 
 		
     </style>
