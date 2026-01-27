@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jay-scorepad-v1';
+const CACHE_NAME = 'jay-scorepad-v2';
 // List every file your app needs to work offline
 const ASSETS = [
   './',
@@ -42,3 +42,4 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+
