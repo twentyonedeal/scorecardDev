@@ -13,52 +13,18 @@
 <meta name="theme-color" content="#4B0082">
 
 <style>
-   /* Force the very background of the entire window to be purple */
-html {
-    background-color: #4B0082 !important;
-}
 
-body {
-    background-color: #4B0082 !important;
-    margin: 0;
-    padding: 0;
-}
-
-/* Ensure the container fills the screen but respects the clock */
-.container {
-    background-color: #4B0082;
-    min-height: 100vh;
-    /* This is the key: it adds padding exactly the height of the clock area */
-    padding-top: env(safe-area-inset-top, 20px); 
-}
-	
-	body {
-        margin: 0;
-        padding: 0;
-    }
-
-   /* 1. Reset the body so sides/bottom aren't forced purple */
-html, body {
-    background-color: #ffffff; /* Or your dark mode color */
-    margin: 0;
-    padding: 0;
-    /* This prevents the "bounce" effect from showing purple on the bottom */
-    overscroll-behavior-y: none; 
-}
-
-/* 2. Create the Fixed Purple Cap */
+/* 2. Create the Purple Header */
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
     background-color: #4B0082;
     color: white;
+    /* This makes the purple stay at the top while you scroll */
+    position: sticky; 
+    top: 0;
     z-index: 1000;
-    /* This is the magic: purple fills the notch + the header height */
-    padding-top: env(safe-area-inset-top); 
+    /* This fills the area behind the clock */
+    padding-top: env(safe-area-inset-top);
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
     
    	  
@@ -118,13 +84,7 @@ header {
 			}
         input[type="number"], input[type="text"] { padding: 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--text); }
         #toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #333; color: white; padding: 12px 25px; border-radius: 25px; font-size: 0.9rem; opacity: 0; transition: opacity 0.3s; z-index: 4000; pointer-events: none; }
-.container {
-    /* Push content down so it starts below the fixed header */
-    /* Adjust '80px' based on how tall your JAY Scorepad title is */
-    margin-top: calc(env(safe-area-inset-top) + 60px); 
-    padding: 15px;
-    background-color: transparent; /* Let the body color show through */
-}
+
 
 		
     </style>
