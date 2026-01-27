@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=yes">
+
     <title>Js ScoreCard V108</title>
     <link rel="manifest" href="manifest.json">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -12,7 +13,11 @@
 		
 
    <style>
-	
+		
+		body {
+		/* Pushes all content down so it starts below the status bar */
+		padding-top: env(safe-area-inset-top);
+			}
         * { box-sizing: border-box; }
         :root { --hideNum: "white"; --bg: #f0f2f5; --card: #ffffff; --text: #2c3e50; --border: #ced4da; --accent: #27ae60; --total-bg: #e2e6ea; }
         .dark-mode { --bg: #121212; --card: #1e1e1e; --text: #e0e0e0; --border: #444; --accent: #2ecc71; --total-bg: #2d2d2d; }
@@ -52,6 +57,8 @@
         .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
         .calc-btn { padding: 15px 0; background: #34495e; color: white; border-radius: 8px; border: none; font-weight: bold; font-size: 1.1rem; }
         .calc-btn.op { background: #f39c12; }
+		.calc-btn.back { background: #e74c3c; }
+
         .col-batch { width: 95px; text-align: right; padding-right: 8px !important; position: relative;text-transform: uppercase; font-size: 1.8rem; letter-spacing: .05px; }
 
 		.calc-trigger { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 12px; background: #34495e; color: white; padding: 4px 6px; border-radius: 4px; opacity: 0.8; }
@@ -76,7 +83,7 @@
 <body>
 <div class="container">
     <h1 style="text-align:center; font-size: 1.5rem; margin:0 0 5px 0;">Jay's Ultimate Scorecard</h1>
-    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">v109A</div>
+    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">v109BB</div>
     <div id="activeGameLabel" style="font-size: 0.75rem; text-align: center; margin-bottom:5px;"></div>
             <span style="display: inline-block; margin-bottom:10px;" id="offlineTag">Checking...</span>
 
@@ -150,7 +157,7 @@
     <div class="calc-grid">
         <button class="calc-btn" onclick="calcPush('7')">7</button><button class="calc-btn" onclick="calcPush('8')">8</button><button class="calc-btn" onclick="calcPush('9')">9</button><button class="calc-btn op" onclick="calcPush('+')">+</button>
         <button class="calc-btn" onclick="calcPush('4')">4</button><button class="calc-btn" onclick="calcPush('5')">5</button><button class="calc-btn" onclick="calcPush('6')">6</button><button class="calc-btn op" onclick="calcPush('-')">-</button>
-        <button class="calc-btn" onclick="calcPush('1')">1</button><button class="calc-btn" onclick="calcPush('2')">2</button><button class="calc-btn" onclick="calcPush('3')">3</button><button class="calc-btn op" onclick="calcClear()">C</button>
+        <button class="calc-btn" onclick="calcPush('1')">1</button><button class="calc-btn" onclick="calcPush('2')">2</button><button class="calc-btn" onclick="calcPush('3')">3</button><button class="calc-btn back" onclick="calcClear()">⌫</button>
         <button class="calc-btn" onclick="calcPush('0')" style="grid-column:span 2">0</button><button class="calc-btn op" onclick="calcSolve()">=</button><button class="calc-btn op" onclick="calcPush('*')">×</button>
         <button class="calc-btn" style="grid-column:span 2; background:#95a5a6" onclick="closeModal('calcModal')">Cancel</button>
         <button class="calc-btn" style="grid-column:span 2; background:var(--accent)" onclick="calcApply()">Apply</button>
@@ -312,8 +319,12 @@
 
     function openCalc(id) { activeCalcId = id; document.getElementById('calcDisplay').innerText = '0'; openModal('calcModal'); }
     function calcPush(v) { let d = document.getElementById('calcDisplay'); d.innerText = d.innerText === '0' ? v : d.innerText + v; }
-    function calcClear() { document.getElementById('calcDisplay').innerText = '0'; }
-    function calcSolve() { try { document.getElementById('calcDisplay').innerText = eval(document.getElementById('calcDisplay').innerText.replace(/×/g, '*')); } catch { document.getElementById('calcDisplay').innerText = "Error"; } }
+    function calcClear() { let d=document.getElementById('calcDisplay'); d.innerText = d.innerText.slice(0,-1) || "0"; }
+    
+		
+	
+	
+	function calcSolve() { try { document.getElementById('calcDisplay').innerText = eval(document.getElementById('calcDisplay').innerText.replace(/×/g, '*')); } catch { document.getElementById('calcDisplay').innerText = "Error"; } }
     function calcApply() { calcSolve(); let r = document.getElementById('calcDisplay').innerText; if(r !== "Error") { document.getElementById(activeCalcId).value = r; closeModal('calcModal'); } }
 
     function openRename(id) { renId = id; document.getElementById('renameIn').value = players.find(x => x.id === id).name; openModal('renameModal'); setTimeout(()=>document.getElementById('renameIn').select(), 100); }
@@ -420,8 +431,10 @@ document.getElementById('activeGameLabel').innerHTML = activeId
                     <button onclick="shareG(${i})" style="background:#27ae60; color:white; border:none; border-radius:6px; padding:8px 10px;">📤</button>
                     <button onclick="delSave(${i})" style="background:#e74c3c; color:white; border:none; border-radius:6px; padding:8px 10px;">🗑️</button>
                 </div>
-            </div>`).join('') || "No saved games.";
+            </div>`).join('') || `<div style="padding: 20px 12px; color: var(--text-muted);">No saved games.</div>`;
         openModal('libraryModal');
+		
+				
     }
 
     function loadG(i) {
