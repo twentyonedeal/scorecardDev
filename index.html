@@ -13,7 +13,10 @@
 		
 
    <style>
-		
+		/* Prevents double-tap to zoom while still allowing pinch-to-zoom */
+body.modal-open {
+    touch-action: manipulation;
+}
 		body {
 		/* Pushes all content down so it starts below the status bar */
 		padding-top: env(safe-area-inset-top);
@@ -84,7 +87,7 @@
 <body>
 <div class="container">
     <h1 style="text-align:center; font-size: 1.5rem; margin:0 0 5px 0;">Jay's Ultimate Scorecard</h1>
-    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">v111</div>
+    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">v111_DT</div>
     <div id="activeGameLabel" style="font-size: 0.75rem; text-align: center; margin-bottom:5px;"></div>
             <span style="display: inline-block; margin-bottom:10px;" id="offlineTag">Checking...</span>
 
