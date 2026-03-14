@@ -315,7 +315,7 @@ style="max-width:380px; border-top: 5px solid #e74c3c; display: flex; flex-direc
     window.addEventListener('online', updateStatus); window.addEventListener('offline', updateStatus); updateStatus();
 
 
-    function openModal(id) { document.getElementById(id).style.display = 'flex';  touch-action: manipulation;}
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
     function showToast(m) { const t = document.getElementById('toast'); t.innerText = m; t.style.opacity = '1'; setTimeout(() => t.style.opacity = '0', 2000); }
     function toggleDarkMode() { isDark = !isDark; document.body.classList.toggle('dark-mode'); localStorage.setItem('v102_dark', isDark);}
