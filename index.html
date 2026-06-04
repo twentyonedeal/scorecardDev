@@ -98,7 +98,7 @@
 
 	.calc-trigger { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 12px; background: #34495e; color: white; padding: 4px 6px; border-radius: 4px; opacity: 0.8; }
 
-    #roundTable { width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem; }
+    #roundTable { width: 100%; border-collapse: collapse;   overflow-x: hidden; text-align: center; font-size: 0.9rem; }
     #roundTable th, #roundTable td { padding: 8px 4px; border: 1px solid var(--border); }
     .score-cell { font-weight: bold; color: #f5b342; display: inline-block; border: none; background: transparent; }
     .badge { background: #52442d; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; }
@@ -151,7 +151,7 @@
 	
 	<div class="container">
 		<h2 style="text-align:center; font-size: 1.5rem; margin:0 0 5px 0;">Jay's Ultimate Scorecard</h2>
-    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">V261</div>
+    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">V1.0</div>
 	<div id="activeGameLabel" style="font-size: 0.75rem; text-align: center; margin-bottom:5px;"></div>
     <span style="display: inline-block; margin-bottom:10px;" id="offlineTag">Checking...</span>
     <div style="display:grid; grid-template-columns: 1fr 1fr 44px 44px; gap:8px; margin-bottom:15px;">
@@ -880,8 +880,8 @@ function saveEdit() {
         document.getElementById('roundBody').innerHTML = rounds.map((r, ri) => `<tr><td>${ri+1}</td>${roundPlayers.map(p => `<td><span class="score-cell" onclick="openEdit(${ri}, ${p.id})">${r.scores[p.id]||0}</span></td>`).join('')}<td><button class="del-round-btn" onclick="askDelR(${ri})">✕</button></td></tr>`).join('');
 
 		// document.getElementById('roundFooter').innerHTML = players.length ? `<tr class="total-row"><td>Σ</td>${displayPlayers.map(p => `<td style="color:${p.color}">${p.score}</td>`).join('')}<td></td></tr>` : "";
-		// document.getElementById('roundFooter').innerHTML = players.length ? `<tr style="background:var(--total-bg); font-weight:bold;"><td>Σ</td>${roundPlayers.map(p => `<td style="color:${p.color}">${p.score}</td>`).join('')}<td></td></tr>` : "";
-		document.getElementById('roundFooter').innerHTML = players.length ? `<tr style="background:var(--total-bg); font-weight:bold;"><td>Σ</td>${roundPlayers.map(p => `<td style="color:'#000000'">${p.score}</td>`).join('')}<td></td></tr>` : "";
+		document.getElementById('roundFooter').innerHTML = players.length ? `<tr style="background:var(--total-bg); font-weight:bold;"><td>Σ</td>${roundPlayers.map(p => `<td style="color:${p.color}">${p.score}</td>`).join('')}<td></td></tr>` : "";
+		//document.getElementById('roundFooter').innerHTML = players.length ? `<tr style="background:var(--total-bg); font-weight:bold;"><td>Σ</td>${roundPlayers.map(p => `<td style="color:'#000000'">${p.score}</td>`).join('')}<td></td></tr>` : "";
 
 		document.getElementById('roundCounter').innerText = `${rounds.length} Rounds Played`;
 		if(rounds.length == 1) {document.getElementById('roundCounter').innerText = `${rounds.length} Round Played`;}
