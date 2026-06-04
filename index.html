@@ -862,8 +862,12 @@ function saveEdit() {
 
 		document.getElementById('roundHeader').innerHTML = `<th>R</th>` + roundPlayers.map(p => {
     // Determine text color based on background color
-    const isBlackBg = p.color.toLowerCase() === 'black' || p.color === '#000000';
-    const textColor = isBlackBg ? 'white' : 'black';
+	udaman = p.color;
+	checkcolor (udaman);
+    //const isBlackBg = p.color.toLowerCase() === 'black' || p.color === '#000000';
+    //const textColor = isBlackBg ? 'white' : 'black';
+    //const textColor = isBlackBg ? '#4B0082' : '#4B0082';
+
 
     return `<th style="background:${p.color}; color:${textColor};">${p.name[0]}</th>`;
   }).join('') + `<th>✕</th>`;
@@ -876,7 +880,9 @@ function saveEdit() {
         document.getElementById('roundBody').innerHTML = rounds.map((r, ri) => `<tr><td>${ri+1}</td>${roundPlayers.map(p => `<td><span class="score-cell" onclick="openEdit(${ri}, ${p.id})">${r.scores[p.id]||0}</span></td>`).join('')}<td><button class="del-round-btn" onclick="askDelR(${ri})">✕</button></td></tr>`).join('');
 
 		// document.getElementById('roundFooter').innerHTML = players.length ? `<tr class="total-row"><td>Σ</td>${displayPlayers.map(p => `<td style="color:${p.color}">${p.score}</td>`).join('')}<td></td></tr>` : "";
-		document.getElementById('roundFooter').innerHTML = players.length ? `<tr style="background:var(--total-bg); font-weight:bold;"><td>Σ</td>${roundPlayers.map(p => `<td style="color:${p.color}">${p.score}</td>`).join('')}<td></td></tr>` : "";
+		// document.getElementById('roundFooter').innerHTML = players.length ? `<tr style="background:var(--total-bg); font-weight:bold;"><td>Σ</td>${roundPlayers.map(p => `<td style="color:${p.color}">${p.score}</td>`).join('')}<td></td></tr>` : "";
+		document.getElementById('roundFooter').innerHTML = players.length ? `<tr style="background:var(--total-bg); font-weight:bold;"><td>Σ</td>${roundPlayers.map(p => `<td style="color:'#000000'">${p.score}</td>`).join('')}<td></td></tr>` : "";
+
 		document.getElementById('roundCounter').innerText = `${rounds.length} Rounds Played`;
 		if(rounds.length == 1) {document.getElementById('roundCounter').innerText = `${rounds.length} Round Played`;}
 				
@@ -886,6 +892,23 @@ function saveEdit() {
             spot.innerText = `🏆 Leader: ${rankedRef[0].name} (${rankedRef[0].score})`; 
         } else spot.style.display = 'none';
     }
+
+	function checkcolor(hexValue) {
+	const hex = hexValue.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+	  // 2. Normalize and apply gamma correction
+    const [rL, gL, bL] = [r, g, b].map(c => {
+        c /= 255;
+        return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    });
+	    const luminance = 0.2126 * rL + 0.7152 * gL + 0.0722 * bL;
+    return textColor = luminance > 0.179 ? '#000000' : '#FFFFFF';
+	
+
+	}
+	
 
     function openSaveModal() {
         let activeGame = library.find(g => g.id == activeId);
