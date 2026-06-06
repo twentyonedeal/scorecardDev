@@ -830,9 +830,31 @@ function saveEdit() {
  <!-- 3. Hidden Text Measurer -->
 <span 
     id="measure-${p.id}" 
-    style="position: absolute; right: 0; top: 0; visibility: hidden; white-space: pre; font-size: 2rem; font-family: inherit; transform: scaleX(-1); transform-origin: right;"
+    style="position: absolute;
+	<!-- right: 0; top: 0; -->
+	top: 0; left: 0;
+//	width: 0;
+	height: 0;
+
+	visibility: hidden; 
+	white-space: pre; 
+	font-size: 2rem;
+	font-family: inherit;
+	transform: scaleX(-1);
+	transform-origin: right;"
   ></span>
 
+<!-- <span 
+    id="measure-${p.id}" 
+    style="position: absolute;
+	top: 0; left: 0; width: 0; height: 0;
+	overflow: hidden;
+	opacity: 0;
+	pointer-events: none;
+	white-space: pre; 
+	font-size: 2rem;
+	font-family: inherit;"
+  ></span> -->
 
 
 </td>
