@@ -828,10 +828,13 @@ function saveEdit() {
     style="position:absolute; right:.4em; top:50%; transform:translateY(-50%); font-size:0.8rem; padding: .3rem; border-radius:4px; border:none; background:#34495e; color:white; z-index: 1;"
   >CALC</button>
  <!-- 3. Hidden Text Measurer -->
-  <span 
+
+<span 
     id="measure-${p.id}" 
-    style="position: absolute; visibility: hidden; white-space: pre; font-size: 2rem; font-family: inherit;"
+    style="position: absolute; top: 0; left: 0; width: 0; height: 0; overflow: hidden; opacity: 0; pointer-events: none; white-space: pre; font-size: 2rem; font-family: inherit;"
   ></span>
+
+
 
 </td>
 
