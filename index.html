@@ -815,6 +815,9 @@ function saveEdit() {
       /* 24px matches your 10px left/right padding + 4px borders */
       const newWidth = measurer.offsetWidth + 24; 
       
+	  /* Ensure text shifts right so growth occurs on the left */
+      this.style.textAlign = 'left';
+	  
       /* Clamp tightly between 95px and 110px */
       this.style.width = Math.min(Math.max(newWidth, 95), 165) + 'px';
     "
