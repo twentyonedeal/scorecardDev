@@ -151,7 +151,7 @@
 	
 	<div class="container">
 		<h2 style="text-align:center; font-size: 1.5rem; margin:0 0 5px 0;">Jay's Ultimate Scorecard</h2>
-    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">V300</div>
+    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">V1.0</div>
 	<div id="activeGameLabel" style="font-size: 0.75rem; text-align: center; margin-bottom:5px;"></div>
     <span style="display: inline-block; margin-bottom:10px;" id="offlineTag">Checking...</span>
     <div style="display:grid; grid-template-columns: 1fr 1fr 44px 44px; gap:8px; margin-bottom:15px;">
@@ -782,30 +782,41 @@ function saveEdit() {
 			   <td><b onclick="openRename(${p.id})">${p.name}</b></td>
                 <td onclick="askDelP(${p.id})" style="width:43px; text-align:right; padding: 0px 1px 0px 0px; opacity:0.6;">🗑️</td>
                 <td class="toggle-col" style="text-align:left; font-size:0.7rem; color:var(--hideNum); width:32px;">${lastRound ? `(${lastRound.scores[p.id]})` : ''}</td>
-
-				<td style="text-align:right; font-weight:bold; padding-right:8px; width:60px;">${p.score}</td>
+                <td style="text-align:right; font-weight:bold; padding-right:8px; width:60px;">${p.score}</td>
 				
 				
-				<td class="col-batch" style="position: relative; width: 95px; height: 60px; text-align: right;">
-				<style> .batch-input {
-				position: absolute;
-				right: 0;
-				top: 50%;
-				transform: translateY(-50%);
+				
+				<td class="col-batch" style="position: relative; width: 100px; height: 60px; text-align: right;">
+  <style>
+    .batch-input {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
       
-				/* Base sizing and styles */
-				min-width: 95px;   /* Never shrinks smaller than your original size */
-				max-width: 95px;  /* Never grows too large for the table cell */
-				width: 95px;
-				padding: 10px;
-				font-size: 2rem;
-				box-sizing: border-box;
-				}
-				
-				</style>
-				<!-- 1. The Dynamic Input Field -->
-				<input type="text" pattern="-[0-9]*|[0-9]*" inputmode="numeric" id="b-${p.id}" 
-					placeholder="+" 
+      /* Base sizing and styles */
+      min-width: 100px;   /* Never shrinks smaller than your original size */
+      max-width: 165px;  /* Never grows too large for the table cell */
+      width: 95px;
+      padding: 10px;
+      font-size: 2rem;
+      box-sizing: border-box;
+    }
+
+    /* Hide button when input is clicked OR when it contains numbers */
+ //   .batch-input:focus + .calc-btn,
+  //  .batch-input:not(:placeholder-shown) + .calc-btn {
+   //   display: none !important;
+   // }
+  </style>
+
+  <!-- 1. The Dynamic Input Field -->
+  <input 
+    type="text" 
+    pattern="-[0-9]*|[0-9]*" 
+    inputmode="numeric" 
+    id="b-${p.id}" 
+    placeholder="+" 
     class="batch-input"
 	style="border: 2px solid ${p.color.toLowerCase() === 'black' || p.color === '#000000' ? '#ffffff' : p.color};"
 
@@ -816,8 +827,8 @@ function saveEdit() {
       /* Calculate width: text width + padding + border */
       const newWidth = measurer.offsetWidth + 24; 
       
-      /* Clamp between min (100px 95) and max (165px 130 ) */
-      this.style.width = Math.min(Math.max(newWidth, 95), 95) + 'px';
+      /* Clamp between min (100px) and max (165px) */
+      this.style.width = Math.min(Math.max(newWidth, 100), 165) + 'px';
     "
   >
 
@@ -827,15 +838,14 @@ function saveEdit() {
     onclick="openCalc('b-${p.id}')" 
     style="position:absolute; right:.4em; top:50%; transform:translateY(-50%); font-size:0.8rem; padding: .3rem; border-radius:4px; border:none; background:#34495e; color:white; z-index: 1;"
   >CALC</button>
- <!-- 3. Hidden Text Measurer -->
 
-<span 
+  <!-- 3. Hidden Text Measurer (Must match input font size exactly) -->
+  <span 
     id="measure-${p.id}" 
-    style="position: absolute; top: 0; left: 0; width: 0; height: 0; overflow: hidden; opacity: 0; pointer-events: none; white-space: pre; font-size: 2rem; font-family: inherit;"
+    //style="position: absolute; visibility: hidden; white-space: pre; font-size: 2rem; font-family: inherit;"
+	style="position: absolute; top: 0; left: 0; width: 0; height: 0; overflow: hidden; opacity: 0; pointer-events: none; white-space: pre; font-size: 2rem; font-family: inherit;"
+
   ></span>
-
-
-
 </td>
 
 
