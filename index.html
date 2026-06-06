@@ -782,11 +782,11 @@ function saveEdit() {
 			   <td><b onclick="openRename(${p.id})">${p.name}</b></td>
                 <td onclick="askDelP(${p.id})" style="width:43px; text-align:right; padding: 0px 1px 0px 0px; opacity:0.6;">🗑️</td>
                 <td class="toggle-col" style="text-align:left; font-size:0.7rem; color:var(--hideNum); width:32px;">${lastRound ? `(${lastRound.scores[p.id]})` : ''}</td>
-                <td style="text-align:right; font-weight:bold; padding-right:8px; width:60px;">${p.score}</td>
+
+				<td style="text-align:right; font-weight:bold; padding-right:8px; width:60px;">${p.score}</td>
 				
 				
-				
-				<td class="col-batch" style="position: relative; width: 100px; height: 60px; text-align: right;">
+				<td class="col-batch" style="position: relative; width: 95px; height: 60px; text-align: right;">
 				<style> .batch-input {
 				position: absolute;
 				right: 0;
@@ -794,8 +794,8 @@ function saveEdit() {
 				transform: translateY(-50%);
       
 				/* Base sizing and styles */
-				min-width: 100px;   /* Never shrinks smaller than your original size */
-				max-width: 165px;  /* Never grows too large for the table cell */
+				min-width: 95px;   /* Never shrinks smaller than your original size */
+				max-width: 95px;  /* Never grows too large for the table cell */
 				width: 95px;
 				padding: 10px;
 				font-size: 2rem;
@@ -817,7 +817,7 @@ function saveEdit() {
       const newWidth = measurer.offsetWidth + 24; 
       
       /* Clamp between min (100px 95) and max (165px 130 ) */
-      this.style.width = Math.min(Math.max(newWidth, 95), 130) + 'px';
+      this.style.width = Math.min(Math.max(newWidth, 95), 95) + 'px';
     "
   >
 
@@ -828,11 +828,7 @@ function saveEdit() {
     style="position:absolute; right:.4em; top:50%; transform:translateY(-50%); font-size:0.8rem; padding: .3rem; border-radius:4px; border:none; background:#34495e; color:white; z-index: 1;"
   >CALC</button>
 
-  <!-- 3. Hidden Text Measurer (Must match input font size exactly) -->
-  <span 
-    id="measure-${p.id}" 
-    style="position: absolute; visibility: hidden; white-space: pre; font-size: 2rem; font-family: inherit;"
-  ></span>
+
 </td>
 
 
