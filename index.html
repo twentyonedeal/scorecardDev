@@ -151,7 +151,7 @@
 	
 	<div class="container">
 		<h2 style="text-align:center; font-size: 1.5rem; margin:0 0 5px 0;">Jay's Ultimate Scorecard</h2>
-    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">V300</div>
+    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">V400</div>
 	<div id="activeGameLabel" style="font-size: 0.75rem; text-align: center; margin-bottom:5px;"></div>
     <span style="display: inline-block; margin-bottom:10px;" id="offlineTag">Checking...</span>
     <div style="display:grid; grid-template-columns: 1fr 1fr 44px 44px; gap:8px; margin-bottom:15px;">
@@ -816,7 +816,7 @@ function saveEdit() {
       const newWidth = measurer.offsetWidth + 24; 
       
 	  /* Ensure text shifts right so growth occurs on the left */
-      this.style.textAlign = 'left';
+      // this.style.textAlign = 'left';
 	  
       /* Clamp tightly between 95px and 110px */
       this.style.width = Math.min(Math.max(newWidth, 95), 165) + 'px';
@@ -835,10 +835,11 @@ function saveEdit() {
     id="measure-${p.id}" 
     style="position: absolute;
 	right: 0;
-	text-align: left;
+	//text-align: left;
+	left: auto;
 	top: 0;
-//	left: 0;
-//	width: 0;
+//	left: 0; 
+//	width: 0; 
 	height: 0;
 
 	visibility: hidden; 
