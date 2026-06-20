@@ -139,6 +139,135 @@
 		/* Disables pull-to-refresh and the "rubber-band" bounce */
 		overscroll-behavior-y: none;
 		}
+		
+		
+	.help-trigger-btn {
+    /* Reset existing styles */
+    background-color: transparent;
+    border: 2px solid currentColor; /* Circle border matches text color */
+    box-shadow: none;
+    padding: 0;
+    
+    /* Create the perfect circle */
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    
+    /* Center the question mark */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.2s;
+
+    /* Light Mode Default: Black text and border */
+    /*color: #000000; */
+	/*color: var(--text);*/
+	color: #8000ff;
+}
+
+/* Dark Mode: Automatically switches to white text and border */
+@media (prefers-color-scheme: dark) {
+    .help-trigger-btn {
+        color: #ffffff;
+    }
+}
+
+/* Optional hover effect since there is no background */
+.help-trigger-btn:hover {
+    opacity: 0.8;
+}
+
+
+
+
+/* The Slide-Out Panel Box Container */
+.help-side-panel {
+    position: fixed;
+    top: 0;
+    right: -450px; /* Hidden off-screen by default */
+    width: 450px;
+    max-width: 100%;
+    height: 100vh;
+    background: #ffffff;
+    box-shadow: -4px 0 25px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.3s ease-in-out; /* Smooth slide mechanism */
+	box-sizing: border-box;
+}
+
+/* Active Class to launch panel */
+.help-side-panel.open {
+    right: 0;
+	
+}
+
+/* Header inside the panel */
+.panel-header {
+    padding: 16px 20px;
+    background: #4B0082; /* Deep Royal Purple background */
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+	padding-top: calc(15px + env(safe-area-inset-top)); 
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.panel-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.close-panel-btn {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.75rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* Body wrapping the frame element */
+.panel-body {
+    flex: 1;
+    overflow: hidden;
+}
+
+.panel-body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Dim overlay background behind panel */
+.panel-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 9998;
+    display: none;
+}
+
+.panel-overlay.open {
+    display: block;
+}
+
+
+		
+		
+		
+		
+		
 
     </style>
 </head>
@@ -151,29 +280,72 @@
 	
 	<div class="container">
 		<h2 style="text-align:center; font-size: 1.5rem; margin:0 0 5px 0;">Jay's Ultimate Scorecard</h2>
-    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">V700</div>
+    <div style="text-align:center;  font-size: .75rem; margin:0 0 5px 0;">V 1.0.0</div>
 	<div id="activeGameLabel" style="font-size: 0.75rem; text-align: center; margin-bottom:5px;"></div>
-    <span style="display: inline-block; margin-bottom:10px;" id="offlineTag">Checking...</span>
-    <div style="display:grid; grid-template-columns: 1fr 1fr 44px 44px; gap:8px; margin-bottom:15px;">
+	
+	<div style="text-align:left; gap:8px; margin-bottom:5px;">
+
+    <span style="display: inline-block; margin-bottom:8px;" id="offlineTag">Checking...</span>
+	
+
+	<!-- 1. The Trigger Button -->
+<!-- <button class="help-trigger-btn" onclick="toggleHelpPanel()">   -->
+<button class="help-trigger-btn" onclick="toggleHelpPanel()">?</button>
+
+    <!-- Simple interrogation/question mark SVG icon -->
+  <!--  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>   -->
+
+</button>
+</div>
+
+
+<!-- 2. The Slide-Out Help Panel Container -->
+<div id="helpPanel" class="help-side-panel">
+    <div class="panel-header">
+        <h3>Information</h3>
+        <button class="close-panel-btn" onclick="toggleHelpPanel()">&times;</button>
+    </div>
+    <div class="panel-body">
+        <!-- Embeds your purple help-content.html template securely -->
+        <iframe src="help-content.html" title="App Help Documentation"></iframe>
+    </div>
+</div>
+
+<!-- 3. Optional Overlay Dimmer Background -->
+<div id="panelOverlay" class="panel-overlay" onclick="toggleHelpPanel()"></div>
+
+
+
+
+
+
+
+
+
+
+
+	
+    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr 44px 44px; gap:8px; margin-bottom:15px;">
         <button onclick="openSaveModal()" style="background:#3498db; color:white; border:none; border-radius:8px; padding:12px;">💾 Save</button>
         <button onclick="openLibrary()" style="background:#9b59b6; color:white; border:none; border-radius:8px; padding:12px;">📚 Lib</button>
-        <button onclick="toggleManualMode()" id="seatingBtn" style="background:#34495e; color:white; border:none; border-radius:8px; padding:12px;">🪑</button>
+		<button onclick="openModal('resetModal')" style =" background:#95a5a6; color:white; border:none; padding:12px; border-radius:8px;">Reset</button>
+        <button onclick="toggleManualMode(); updateVisibility2();" id="seatingBtn" style="background:#34495e; color:white; border:none; border-radius:8px; padding:12px;">🪑</button>
         <button onclick="toggleDarkMode()" style="background:#34495e; color:white; border:none; border-radius:8px; padding:12px;">🌙</button>
-    </div>
+		</div>
 
     <div style="display: flex; gap: 8px; margin-bottom: 20px; background: var(--bg); padding: 8px; border-radius: 10px; align-items: center;">
-        <input type="text" id="playerName" placeholder="Player Name" style="flex:1;" onkeydown="if(event.key==='Enter') addPlayer()">
-        <div class="square-color-picker" id="colorPreview" style="width:40px; height:40px; border-radius:8px; background:#3498db;" onclick="openColorPicker('new')"></div>
+		<input type="text" id="playerName" aria-label="Player Name" placeholder="Player Name" style="flex:1;" onkeydown="if(event.key==='Enter') addPlayer()">
+		<div class="square-color-picker" id="colorPreview" style="width:40px; height:40px; border-radius:8px; background:#3498db;" onclick="openColorPicker('new')" ></div>
         <button onclick="addPlayer()" style="background:var(--accent); color:white; border:none; padding:10px 15px; border-radius:8px; font-weight:bold;">Add</button>
-    </div>
+		</div>
 	<div class="win-toggle-container">
 		<span id="highWinsLabel" style="color: #27ae60; font-weight: bold;">High Wins</span>
 		<label class="switch">
 			<input type="checkbox" id="winConditionToggle" onchange="toggleWinCondition()">
 			<span class="slider"></span>
 		</label>
-    <span id="lowWinsLabel" style="color: grey;">Low Wins</span>
-	</div>
+		<span id="lowWinsLabel" style="color: grey;">Low Wins</span>
+		</div>
 	<div id="winnerSpotlight" style="text-align:center; padding:10px; border-radius:10px; font-weight:bold; display:none; color: black;"></div>
     <div class="section-title">
 		<span id="leaderboard-title" data-label="🏆 Leader Board"></span>
@@ -182,19 +354,19 @@
 				<input type="checkbox" style="cursor: pointer;" id="toggleNumbers" onchange="updateVisibility()"> 
 				Last Round Scores
 			</label>
+			</div>
 		</div>
-	</div>
     <div class="section-title2">
 	 	<span id="leaderboard-title2" ></span>
 		<div class="controls2">
 			<div id="seating_container" style="display:none;">
 			<label>
-				<input type="checkbox" style="cursor: pointer;" id="toggleSeating" onchange="updateVisibility2()"> 
+				<input type="checkbox" style="cursor: pointer;" id="toggleSeating" onchange="updateVisibility2()" checked> 
 				Seating Locked
 			</label>
 			</div>
+			</div>
 		</div>
-	</div>
 	<table id="leaderboardTable"><tbody id="leaderboard"></tbody></table>
     <table style="width:100%; table-layout: fixed; border-collapse:collapse;"></table>
     <div id="batchAction" style="display:none; margin-top:15px;">
@@ -203,7 +375,7 @@
     <div class="section-title">
         <span>📊 Round History</span>
         <span id="roundCounter" class="badge">0 Rounds</span>
-    </div>
+		</div>
 
     <div style="overflow-x:auto; border:1px solid var(--border); border-radius:8px; margin-top:15px;">
 		<table id="roundTable">
@@ -211,9 +383,8 @@
             <tbody id="roundBody"></tbody>
             <tfoot id="roundFooter"></tfoot>
         </table>
-    </div>
+		</div>
  	
-    <button onclick="openModal('resetModal')" style="width:100%; margin-top:25px; background:#95a5a6; color:white; border:none; padding:12px; border-radius:8px;">Reset/Start New</button>
     <div id="syncStatus" style="font-size:10px; text-align:center; margin-top:10px; opacity:0.5;">Checking Offline Sync...</div>
 
 	</div>
@@ -244,16 +415,12 @@
 
             <button class="calc-btn" style="grid-column:span 2; background:#95a5a6" onclick="closeModal('calcModal')">Cancel</button>
             <button class="calc-btn" style="grid-column:span 2; background:var(--accent)" onclick="calcApply()">Apply</button>
-        </div>
-    </div>
-</div>
-
-
-
-
+			</div>
+		</div>
+	</div>
 
 <div id="error-modal" class="modal"><div class="modal-content"
-style="max-width:380px; border-top: 5px solid #e74c3c; display: flex; flex-direction:column; gap:8px; margin-top:15px;">
+	style="max-width:380px; border-top: 5px solid #e74c3c; display: flex; flex-direction:column; gap:8px; margin-top:15px;">
         <h3 style="color: #e74c3c;">⚠️ Invalid input detected!</h3>
         <p>Scores must be whole numbers (positive or negative) without decimals or special symbols. Please fix these entries:
 		
@@ -261,7 +428,7 @@ style="max-width:380px; border-top: 5px solid #e74c3c; display: flex; flex-direc
 		<button onclick="closeModal('error-modal')" style="width:100%; background:#3498db;  padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Fix it</button>
 
     </div>
-</div>
+	</div>
 
 <!-- The Error Modal Backdrop -->
 <div id="errorModal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; backgroundColor: rgba(0,0,0,0.5); justify-content: center; align-items: center;">
@@ -283,7 +450,7 @@ style="max-width:380px; border-top: 5px solid #e74c3c; display: flex; flex-direc
 
 <div id="saveGameModal" class="modal"><div class="modal-content">
 <h3>Save Game</h3>
-<input type="text" id="saveNameIn" placeholder="NewGame" onkeydown="if(event.key==='Enter') doSave(false)">
+<input type="text" id="saveNameIn" aria-label="New Game" placeholder="NewGame" onkeydown="if(event.key==='Enter') doSave(false)">
 <div style="display:flex; flex-direction:column; gap:8px; margin-top:15px;">
 <button onclick="doSave(false)" style="width:100%; background:#27d647; padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Update Current (or Change Name)</button>
 <button onclick="doSave(true)" style="width:100%; background:#3498db;  padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Save Copy (or Enter New Name)</button>
@@ -304,22 +471,66 @@ style="max-width:380px; border-top: 5px solid #e74c3c; display: flex; flex-direc
     <button onclick="closeModal('resetModal')" style="width:100%; background:#95a5a6; padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Cancel</button>
 </div>
 </div></div>
-<div id="renameModal" class="modal"><div class="modal-content"><h3>Rename</h3><input type="text" id="renameIn" style="width:100%;" onkeydown="if(event.key==='Enter') saveRename()"><button onclick="saveRename()" style="width:100%; margin-top:10px; background:var(--accent); color:white; padding:12px; border:none; border-radius:8px;">Update</button></div></div>
-<div id="editModal" class="modal"><div class="modal-content">
-<h3>Edit Score</h3>
- <input type="text" pattern="-[0-9]*|[0-9]*" inputmode="numeric" id="editIn" style="width:100%;
-" onkeydown="if(event.key==='Enter') saveEdit()">
-<button onclick="saveEdit()" style="width:100%; margin-top:15px; padding:12px; background:var(--accent); color:white; border:none; border-radius:8px;">Update Score</button>
+<!-- Rename Modal -->
+<div id="renameModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="renameTitle">
+  <div class="modal-content">
+    <h3 id="renameTitle">Rename</h3>
+    <input type="text" id="renameIn" aria-label="New Name" style="width:100%;" onkeydown="if(event.key==='Enter') saveRename()">
+    <button onclick="saveRename()" style="width:100%; margin-top:10px; background:var(--accent); color:white; padding:12px; border:none; border-radius:8px;">Update</button>
+  </div>
+</div>
+
+<!-- Edit Score Modal -->
+<div id="editModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="editTitle">
+  <div class="modal-content">
+    <h3 id="editTitle">Edit Score</h3>
+    <input type="text" pattern="-[0-9]*|[0-9]*" inputmode="numeric" id="editIn" aria-label="Edit Score Number" style="width:100%;" onkeydown="if(event.key==='Enter') saveEdit()">
+    <button onclick="saveEdit()" style="width:100%; margin-top:15px; padding:12px; background:var(--accent); color:white; border:none; border-radius:8px;">Update Score</button>
     <button onclick="closeModal('editModal')" style="width:100%; margin-top:15px; padding:12px; background:#95a5a6; color:white; border:none; border-radius:8px;">Cancel</button>
-</div></div>
+  </div>
+</div>
+
+<div id="libraryModal" class="modal">
+  <div class="modal-content" style="max-width:380px;">
+	<h3>📚 Library</h3><div id="libList" style="max-height:350px; overflow-y:auto;"></div>
+		<button onclick="closeModal('libraryModal')" style="width:100%; background:#95a5a6;  padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Close</button></div></div>
 
 
-<div id="libraryModal" class="modal"><div class="modal-content" style="max-width:380px;"><h3>📚 Library</h3><div id="libList" style="max-height:350px; overflow-y:auto;"></div><button onclick="closeModal('libraryModal')" style="width:100%; background:#95a5a6;  padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Close</button></div></div>
+<!-- Color Picker Modal
+<div id="colorModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="colorTitle">
+  <div class="modal-content">
+    <h3 id="colorTitle">Pick Color</h3>
+   
+<input type="color" id="nativePicker" aria-label="Select Player Color" oninput="liveColor(this.value); updateColorBorder(this.value)" style="width:100px; height:100px; border:none; background:none; border-radius:12px; box-sizing:border-box; outline: 4px solid transparent; transition: outline 0.15s ease;">
+<button onclick="closeModal('colorModal')" style="width:100%; background:#95a5a6; padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Done</button>
 
 
-<div id="colorModal" class="modal"><div class="modal-content"><h3>Pick Color</h3><input type="color" id="nativePicker" oninput="liveColor(this.value)" style="width:100px; height:100px; border:none; background:none;"><button onclick="closeModal('colorModal')" style="width:100%; background:#95a5a6;  padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Done</button></div></div>
+
+ </div>
+</div> -->
+<div id="colorModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="colorTitle">
+  <div class="modal-content">
+    <h3 id="colorTitle">Pick Color</h3>
+   
+    <!-- Added margin-bottom: 15px; to give the outline breathing room -->
+   <!-- <input type="color" id="nativePicker" aria-label="Select Player Color" oninput="liveColor(this.value); updateColorBorder(this.value)" style="width:100px; height:100px; border:none; background:none; border-radius:12px; box-sizing:border-box; margin-bottom: 15px; outline: 4px solid transparent; transition: outline 0.15s ease;"> -->
+    <input type="color" id="nativePicker" aria-label="Select Player Color" oninput="liveColor(this.value); updateColorBorder(this.value)" style="width:100px; height:100px; border:none; background:none; border-radius:0; box-sizing:border-box; margin-bottom:15px; outline: 4px solid transparent; transition: outline 0.15s ease;">
+
+    <button onclick="closeModal('colorModal')" style="width:100%; background:#95a5a6; padding:15px .2rem; font-size:1rem; color:black; border:none; border-radius:10px;">Done</button>
+  </div>
+</div>
+
+
+
 
 <div id="toast"></div>
+
+
+
+
+
+
+
 <script>
 
 	const statusEl = document.getElementById('syncStatus');
@@ -349,7 +560,64 @@ style="max-width:380px; border-top: 5px solid #e74c3c; display: flex; flex-direc
     window.addEventListener('online', updateStatus); window.addEventListener('offline', updateStatus); updateStatus();
 
 
-    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+function setupColorModal() {
+    const picker = document.getElementById('nativePicker');
+    if (!picker) return;
+
+    // 1. Get the starting color depending on if it's a new or existing player
+    let currentModalColor = '#000000'; // fallback default
+    
+    if (cTarget.t === 'new') {
+        currentModalColor = selColor || '#000000'; 
+    } else {
+        let p = players.find(x => x.id === cTarget.id);
+        if (p && p.color) {
+            currentModalColor = p.color;
+        }
+    }
+
+    // 2. Explicitly sync the HTML input value first
+    picker.value = currentModalColor;
+
+    // 3. Force the border update immediately using the verified color
+    picker.style.outlineColor = isDarkColor(currentModalColor) ? '1px #ffffff' : 'transparent';
+
+    // 4. Also handle the new player preview dot if it exists in your layout
+    if (cTarget.t === 'new') {
+        const preview = document.getElementById('colorPreview');
+        if (preview) {
+            preview.style.background = currentModalColor;
+            preview.style.outline = isDarkColor(currentModalColor) ? '1px solid #ffffff' : 'none';
+        }
+    }
+}
+
+
+
+
+    function openModal(id) { document.getElementById(id).style.display = 'flex';
+// FIX: If opening the color modal, force an immediate border evaluation
+
+    if (id === 'colorModal') {
+	//setupColorModal();
+	//console.log("Opened colorModal");
+        const picker = document.getElementById('nativePicker');
+        if (picker) {
+            // Read the current color value and instantly set the right border
+			console.log("picker.value:",picker.value);
+            picker.style.outlineColor = isDarkColor(picker.value) ? '1px solid #FFFFFF' : 'transparent';
+        }
+	// Also check the preview circle if creating a 'new' player
+        if (cTarget.t === 'new') {
+            const preview = document.getElementById('colorPreview');
+            if (preview) {
+				console.log("selColor:",selColor);
+
+                preview.style.outline = isDarkColor(selColor) ? '1px solid #FFFFFF' : 'none';
+				}
+			}
+		}
+	}
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
     function showToast(m) { const t = document.getElementById('toast'); t.innerText = m; t.style.opacity = '1'; setTimeout(() => t.style.opacity = '0', 2000); }
     function toggleDarkMode() { isDark = !isDark; document.body.classList.toggle('dark-mode'); localStorage.setItem('v102_dark', isDark); updateVisibility();}
@@ -401,24 +669,115 @@ style="max-width:380px; border-top: 5px solid #e74c3c; display: flex; flex-direc
         n.value = ""; 
         selColor = getRandomColor();
         document.getElementById('colorPreview').style.background = selColor;
+        // Update the new player color preview border if it is dark
+       // preview.style.outline = isDarkColor(v) ? '1px solid #ffffff' : 'none';
+	   //liveColor(selColor);
+   
+	   const preview = document.getElementById('colorPreview');
+        preview.style.background = selColor; 
+        // Update the new player color preview border if it is dark
+        preview.style.outline = isDarkColor(selColor) ? '1px solid #ffffff' : 'none';
+  
+	   
         hasUnsavedChanges = true; sync();
     }
 
-    function openColorPicker(t, id) { 
-        cTarget = {t, id}; 
-        let current = (t === 'new') ? selColor : players.find(x => x.id === id).color;
-        document.getElementById('nativePicker').value = current;
-        openModal('colorModal'); 
+//    function openColorPicker(t, id) { 
+  //      cTarget = {t, id}; 
+    //    let current = (t === 'new') ? selColor : players.find(x => x.id === id).color;
+      //  document.getElementById('nativePicker').value = current;
+       // liveColor(current);
+//		openModal('colorModal'); 
+  //  }
+
+function openColorPicker(targetType, playerId) {
+    // 1. Set your global targets so liveColor() knows what to modify
+    cTarget = { t: targetType, id: playerId };
+
+    // 2. Find the input element inside the modal
+    const picker = document.getElementById('nativePicker');
+    
+    // 3. Determine the correct starting color
+    let startingColor = '#000000'; // Fallback color
+    
+    if (targetType === 'new') {
+        startingColor = selColor || '#000000';
+    } else {
+        let p = players.find(x => x.id === playerId);
+        if (p && p.color) {
+            startingColor = p.color;
+        }
     }
 
-    function liveColor(v) { 
-        if(cTarget.t === 'new') { 
-            selColor = v; document.getElementById('colorPreview').style.background = v; 
-        } else { 
-            let p = players.find(x => x.id === cTarget.id); p.color = v; 
-            hasUnsavedChanges = true; render(); 
-        } 
+    // 4. Force synchronization of value and the white border
+    if (picker) {
+        picker.value = startingColor;
+        picker.style.outlineColor = isDarkColor(startingColor) ? '#ffffff' : 'transparent';
     }
+
+    // 5. Handle the preview element if it is a new player setup
+    if (targetType === 'new') {
+        const preview = document.getElementById('colorPreview');
+        if (preview) {
+            preview.style.background = startingColor;
+            preview.style.outline = isDarkColor(startingColor) ? '1px solid #ffffff' : 'none';
+        }
+    }
+
+    // 6. Finally, reveal the modal to the player
+    // Note: Change 'flex' to 'block' if your CSS is not built for Flexbox!
+    document.getElementById('colorModal').style.display = 'flex'; 
+}
+
+
+  function liveColor(v) { 
+    // 1. Instantly update the modal picker's border
+    const picker = document.getElementById('nativePicker');
+    if (picker) {
+		//console.log("liveColor-picker:",picker);
+		console.log("liveColor(v)v=:",v);
+
+       picker.style.outlineColor = isDarkColor(v) ? '1px #FFFFFF' : 'transparent';
+    }
+
+    if(cTarget.t === 'new') { 
+        selColor = v; 
+        const preview = document.getElementById('colorPreview');
+        preview.style.background = v; 
+        // Update the new player color preview border if it is dark
+        preview.style.outline = isDarkColor(v) ? '1px solid #FFFFFF' : 'none';
+    } else { 
+        let p = players.find(x => x.id === cTarget.id); 
+        p.color = v; 
+        hasUnsavedChanges = true; 
+        render(); 
+    } 
+}
+
+function updateColorBorder(hexColor) {
+  const picker = document.getElementById('nativePicker');
+  let hex = hexColor.replace('#', '');
+  
+  if (hex.length === 3) {
+    hex = hex.split('').map(char => char + char).join('');
+  }
+  
+  // Extract RGB components
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+  
+  // YIQ formula calculates human perception of brightness (0 to 255)
+  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+  
+  // Under 60 means dark gray, dark navy, deep colors, or absolute black
+  if (brightness < 60) {
+    picker.style.outlineColor = '#ffffff';
+  } else {
+    picker.style.outlineColor = 'transparent';
+  }
+}
+
 
     function openCalc(id) { activeCalcId = id; document.getElementById('calcDisplay').innerText = '0'; openModal('calcModal'); }
     function calcPush(v) { let d = document.getElementById('calcDisplay'); d.innerText = d.innerText === '0' ? v : d.innerText + v; }
@@ -454,8 +813,7 @@ style="max-width:380px; border-top: 5px solid #e74c3c; display: flex; flex-direc
 	
 		}
 		}
-
-	function calcApply() {
+function calcApply() {
     const display = document.getElementById('calcDisplay');
     const modalContent = document.querySelector('#calcModal .modal-content');
     try {
@@ -468,25 +826,33 @@ style="max-width:380px; border-top: 5px solid #e74c3c; display: flex; flex-direc
             throw new Error("Invalid");
         }
 
-        // 3. Success! Update the display
-        {display.innerText = result;
-		let r = document.getElementById('calcDisplay').innerText;
-		document.getElementById(activeCalcId).value = r;
-		closeModal('calcModal');}
+        // 3. Success! Update the display and target input field
+        display.innerText = result;
+        let r = display.innerText;
+        
+        const targetInput = document.getElementById(activeCalcId);
+        if (targetInput) {
+            targetInput.value = r;
+            
+            // FIX: Force the input box to recalculate its width instantly
+            targetInput.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+
+        closeModal('calcModal');
 
     } catch (e) {
         // 4. Instead of writing "Error" in the box, show the warning modal
-		// 1. Add the shake class
+        // 1. Add the shake class
         modalContent.classList.add('shake-error');
 
-		 // 3. Remove the class after 300ms so it can shake again next time
+        // 3. Remove the class after 300ms so it can shake again next time
         setTimeout(() => {
             modalContent.classList.remove('shake-error');
-			}, 300);
-		       // openModal('error-modal');
-	
-			}
-		}
+        }, 300);
+        // openModal('error-modal');
+    }
+}
+
 
 	
 	//function calcSolve() { try { document.getElementById('calcDisplay').innerText = eval(document.getElementById('calcDisplay').innerText.replace(/×/g, '*')); } catch { document.getElementById('calcDisplay').innerText = "Error"; } }
@@ -679,7 +1045,7 @@ function saveEdit() {
         render();
     }
  function initDragEvents(row) {
-		console.log("initDragEvent_SeatingModeOn:",SeatingModeOn);
+		//console.log("initDragEvent_SeatingModeOn:",SeatingModeOn);
         if(SeatingModeOn) {
 
 		const start = (e) => {
@@ -725,13 +1091,13 @@ function saveEdit() {
     function render() {
 		const table = document.getElementById('leaderboard');
 		const isChecked = document.getElementById('toggleNumbers').checked;
-		console.log("isChecked: ",isChecked);
+		//console.log("isChecked: ",isChecked);
 		if(isChecked){
 			table.classList.remove('hide-column');
 			} else {
 				table.classList.add('hide-column');
 				}
-		console.log("isCheckedinrender: ",isChecked);
+		//console.log("isCheckedinrender: ",isChecked);
 		const listEl = document.getElementById('leaderboard');
         const rankedRef = [...players].sort((a,b) => lowScoreWins ? a.score - b.score : b.score - a.score);
 
@@ -762,19 +1128,22 @@ function saveEdit() {
 		displayPlayers.forEach((p) => {
             const rank = rankedRef.findIndex(rp => rp.id === p.id) + 1;
             const tr = document.createElement('tr');
-            tr.setAttribute('data-id', p.id);
+            udaman = p.color;
+			checkcolor (udaman);
+			tr.setAttribute('data-id', p.id);
             tr.innerHTML = `
 				<td class="drag-handle" style="${(!isManualMode || !SeatingModeOn) ? 'display:none' : ''}">☰</td>
 				<td style="width:3px;"><div style="width:3px;height:52px;background:${p.color}"></div></td>
                 <td style="width:30px; text-align:center; font-weight:bold;">${rank}</td>
-				<td style="width:35px;"><div class="circle-color-picker" style="background: ${p.color}; 
-					width: 22px; height: 22px; 
-					border-radius: 50%;
+				<td style="width:35px;"><div class="circle-color-picker" style="background: ${p.color}; border-radius: 50%;
+					/* Dynamically shrinks width and height by 2px if black */
+					width: ${(isDark && (textColor === '#FFFFFF' || p.color === '#000000')) ? '21px' : '22px'}; 
+					height: ${(isDark && (textColor === '#FFFFFF' || p.color === '#000000')) ? '21px' : '22px'}; 
 					/* Adds a thin white ring ONLY if the color is black */
-					box-shadow: ${p.color.toLowerCase() === 'black' || p.color === '#000000' ? '0 0 0 2px #FFFFFF, 0 0 0 3px #000000' : 'none'};
-					" 
-					onclick="openColorPicker('edit', ${p.id})"
-					></div></td>               
+					box-shadow: ${(isDark && (textColor === '#FFFFFF' || p.color === '#000000')) ? '0 0 0 1px #FFFFFF' : 'none'};
+					"
+  					onclick="openColorPicker('edit', ${p.id})"
+					></div></td>
 				<td><b onclick="openRename(${p.id})">${p.name}</b></td>
                 <td onclick="askDelP(${p.id})" style="width:43px; text-align:right; padding: 0px 1px 0px 0px; opacity:0.6;">🗑️</td>
                 <td class="toggle-col" style="text-align:left; font-size:0.7rem; color:var(--hideNum); width:32px;">${lastRound ? `(${lastRound.scores[p.id]})` : ''}</td>
@@ -848,7 +1217,7 @@ function saveEdit() {
 		}).join('') + `<th>✕</th>`;
 
         document.getElementById('roundBody').innerHTML = rounds.map((r, ri) => `<tr><td>${ri+1}</td>${roundPlayers.map(p => `<td><span class="score-cell" onclick="openEdit(${ri}, ${p.id})">${r.scores[p.id]||0}</span></td>`).join('')}<td><button class="del-round-btn" onclick="askDelR(${ri})">✕</button></td></tr>`).join('');
-		document.getElementById('roundFooter').innerHTML = players.length ? `<tr style="background:var(--total-bg); font-weight:bold;"><td>Σ</td>${roundPlayers.map(p => `<td style="color:${p.color}">${p.score}</td>`).join('')}<td></td></tr>` : "";
+		document.getElementById('roundFooter').innerHTML = players.length ? `<tr style="background:var(--total-bg); font-weight:bold;"><td>Σ</td>${roundPlayers.map(p => `<td style="white">${p.score}</td>`).join('')}<td></td></tr>` : "";
 		document.getElementById('roundCounter').innerText = `${rounds.length} Rounds Played`;
 		if(rounds.length == 1) {document.getElementById('roundCounter').innerText = `${rounds.length} Round Played`;}
 		const spot = document.getElementById('winnerSpotlight');
@@ -867,12 +1236,26 @@ function saveEdit() {
 		const g = parseInt(hex.substring(2, 4), 16);
 		const b = parseInt(hex.substring(4, 6), 16);
 		// Normalize and apply gamma correction
-		const [rL, gL, bL] = [r, g, b].map(c => {c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); } );
-			const luminance = 0.2126 * rL + 0.7152 * gL + 0.0722 * bL;
-			return textColor = luminance > 0.179 ? '#000000' : '#FFFFFF';
-			}
+		//const [rL, gL, bL] = [r, g, b].map(c => {c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); } );
+		//	const luminance = 0.2126 * rL + 0.7152 * gL + 0.0722 * bL;
+		const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+		//return textColor = luminance > 0.179 ? '#000000' : '#FFFFFF';
+		return textColor = brightness > 60 ? '#000000' : '#FFFFFF';
+		}
 	
+	function isDarkColor(hexColor) {
+		let hex = hexColor.replace('#', '');
+		if (hex.length === 3) {
+			hex = hex.split('').map(char => char + char).join('');
+			}
+		const r = parseInt(hex.substring(0, 2), 16);
+		const g = parseInt(hex.substring(2, 4), 16);
+		const b = parseInt(hex.substring(4, 6), 16);
+		const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+		return brightness < 60; // Returns true if dark
+		}
 
+	
     function openSaveModal() {
         let activeGame = library.find(g => g.id == activeId);
         document.getElementById('saveNameIn').value = activeGame ? activeGame.name : "NewGame";
@@ -950,7 +1333,7 @@ function saveEdit() {
 	function updateVisibility() {
 		const table = document.getElementById('leaderboard');
 		const isChecked = document.getElementById('toggleNumbers').checked;
-		console.log("isChecked: ",isChecked);
+		//console.log("isChecked: ",isChecked);
 		if(isChecked)
 			{
 			table.classList.remove('hide-column');
@@ -962,13 +1345,27 @@ function saveEdit() {
 
 	function updateVisibility2() {
 		const isChecked2 = document.getElementById('toggleSeating').checked;
-		console.log("Value of myVariable:", isChecked2);
+		//console.log("Value of myVariable:", isChecked2);
 		if(isChecked2){
 			SeatingModeOn = false;}
 			else {
 				SeatingModeOn = true;}
 		render();
         }    
+	
+
+	function toggleHelpPanel() {
+    const panel = document.getElementById('helpPanel');
+    const overlay = document.getElementById('panelOverlay');
+    
+    // Toggle the visible CSS classes
+    panel.classList.toggle('open');
+    overlay.classList.toggle('open');
+}
+
+
+
+	
 	
 	render();
 </script>
