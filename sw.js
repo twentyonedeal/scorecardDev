@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jay-scorepad-v2';
+const CACHE_NAME = 'scorecarddev2-v2';
 // List every file your app needs to work offline
 const ASSETS = [
   './',
@@ -6,7 +6,8 @@ const ASSETS = [
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
-  './apple-touch-icon.png'
+  './apple-touch-icon.png',
+  './help-content.html'
 ];
 
 // 1. Install: Open cache and save all assets
@@ -42,3 +43,4 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+
